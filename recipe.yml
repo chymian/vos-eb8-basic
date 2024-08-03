@@ -40,6 +40,8 @@ stages:
       - chmod +x /usr/bin/cur-gpu
       - lpkg --unlock
 
+   # Put your custom actions behind this comment
+
 # - name: dev modules
 #   type: includes
 #   includes:
@@ -55,6 +57,8 @@ stages:
 #     - gh:vanilla-os/dev-image:main:modules/200-vib.yml
 
   - name: eb8's base install
+    type: includes
+    includes:
       - gh:chymian/vos-eb8-base:main:modules/50-install-debs.yml
       - gh:chymian/vos-eb8-base:main:modules/1000-basic-pks.yml
       - gh:chymian/vos-eb8-base:main:modules/1010-zfs-setup.yml
@@ -90,8 +94,8 @@ stages:
       - name: remove-prev-fsguard
         type: shell
         commands:
-          - rm -rf /FsGuard 
-          - rm -f ./minisign.pub ./minisign.key 
+          - rm -rf /FsGuard
+          - rm -f ./minisign.pub ./minisign.key
           - chmod +x /usr/sbin/init
 
   - name: cleanup2
