@@ -62,7 +62,7 @@ stages:
       - gh:chymian/vos-eb8-base:main:modules/1020-zerotier-setup.yml
       - gh:chymian/vos-eb8-base:main:modules/1100-yadm-setup.yml
 
-  - name: my dev tools
+  - name: eb8's dev tools
     type: shell
     commands:
       - curl https://git.eb8.org/guenter/dotfiles/raw/branch/master/.local/bin/do_install_tools | bash
