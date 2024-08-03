@@ -75,7 +75,7 @@ stages:
   - name: set-image-name-abroot
     type: includes
     includes:
-      - modules/80-set-image-abroot-config.yml
+      - gh:chymian/vos-eb8-base:main:modules/80-set-image-abroot-config.yml
 
   - name: cleanup
     type: shell
