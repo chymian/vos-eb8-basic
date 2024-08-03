@@ -2,17 +2,18 @@ name: basic-pkgs
 type: apt
 source:
   packages:
-    - vim
+    - autojump
+    - bind9-dnsutils
+    - bridge-utils
+    - btop
+    - byobu
+    - direnv
     - dkms
     - htop
-    - yadm
-    - byobu
-    - python3-requests
-    - direnv
-    - autojump
-    - bridge-utils
-    - bind9-dnsutils
     - net-tools
     - os-prober
+    - python3-requests
     - tlp
-    - btop
+    - tree
+    - vim
+    - yadm
