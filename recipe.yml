@@ -2,7 +2,7 @@ name: eb8's Base-Image  # Core/Dev
 id: vos-eb8-base # Replace this ID with your image ID
 stages:
 - id: build
-  base: ghcr.io/vanilla-os/core:main # Based on VOS-CORE & -dev, no GUI
+  base: ghcr.io/vanilla-os/dev-image:main # Based on VOS-CORE & -dev, no GUI
   singlelayer: false
   labels:
     maintainer: dev@eb8.org
