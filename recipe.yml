@@ -57,10 +57,10 @@ stages:
       - gh:vanilla-os/dev-image:main:modules/101-abroot-deps.yml
       - gh:vanilla-os/dev-image:main:modules/200-vib.yml
 
-# - name: my dev tools
-#   type: shell
-#   commands:
-#     - curl https://git.eb8.org/guenter/dotfiles/raw/branch/master/.local/bin/do_install_tools | bash
+  - name: my dev tools
+    type: shell
+    commands:
+      - curl https://git.eb8.org/guenter/dotfiles/raw/branch/master/.local/bin/do_install_tools | bash
 
   # Put your custom actions before this comment
 
