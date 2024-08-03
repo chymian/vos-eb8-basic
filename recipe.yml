@@ -1,0 +1,93 @@
+name: eb8's Base-Image  # Core/Dev
+id: vos-eb8-base # Replace this ID with your image ID
+stages:
+- id: build
+  base: ghcr.io/vanilla-os/core:main # Based on VOS-CORE & -dev, no GUI
+  singlelayer: false
+  labels:
+    maintainer: dev@eb8.org
+  args:
+    DEBIAN_FRONTEND: noninteractive # Set the image environment as non-interactive
+
+  # Commands to run first before building the modules
+  runs:
+    commands:
+      - echo 'APT::Install-Recommends "1";' > /etc/apt/apt.conf.d/01norecommends
+
+  modules:
+  - name: init-setup
+    type: shell
+    commands:
+    - lpkg --unlock
+    - apt-get update
+
+  # Put your custom actions behind this comment
+
+  - name: basic packages # Sample module using the built-in Apt module to install packages
+    type: includes
+    includes:
+      - gh:chymian/vos-eb8-basic:main:modules/1000-basic-pks
+
+  - name: zfs setup
+    type: includes
+    includes:
+      - gh:chymian/vos-eb8-basic:main:modules/1010-zfs-setup
+
+  - name: zerotier install
+    type: includes
+    includes:
+      - gh:chymian/vos-eb8-basic:main:modules/1020-zerotier-setup
+
+  - name: yadm setup
+    type: includes
+    includes:
+      - gh:chymian/vos-eb8-basic:main:modules/1100-yadm-setup
+
+  - name: dev modules
+    type: includes
+    includes:
+      - gh:vanilla-os/dev-image:main:modules/00-basics.yml
+      - gh:vanilla-os/dev-image:main:modules/01-vanilla-base-files.yml
+      - gh:vanilla-os/dev-image:main:modules/05-go.yml
+      - gh:vanilla-os/dev-image:main:modules/10-python.yml
+      - gh:vanilla-os/dev-image:main:modules/20-build-tools.yml
+      - gh:vanilla-os/dev-image:main:modules/30-gtk.yml
+      - gh:vanilla-os/dev-image:main:modules/40-rust.yml
+      - gh:vanilla-os/dev-image:main:modules/100-apx-gui-deps.yml
+      - gh:vanilla-os/dev-image:main:modules/101-abroot-deps.yml
+      - gh:vanilla-os/dev-image:main:modules/200-vib.yml
+
+  # Put your custom actions before this comment
+
+  - name: set-image-name-abroot
+    type: includes
+    includes:
+      - modules/80-set-image-abroot-config.yml
+
+  - name: cleanup
+    type: shell
+    commands:
+    - apt-get autoremove -y
+    - apt-get clean
+    - lpkg --lock
+
+  - name: fsguard
+    type: fsguard
+    CustomFsGuard: false
+    FsGuardLocation: "/usr/sbin/FsGuard"
+    GenerateKey: true
+    FilelistPaths: ["/usr/bin"]
+    modules:
+      - name: remove-prev-fsguard
+        type: shell
+        commands:
+          - rm -rf /FsGuard 
+          - rm -f ./minisign.pub ./minisign.key 
+          - chmod +x /usr/sbin/init
+
+  - name: cleanup2
+    type: shell
+    commands:
+      - rm -rf /tmp/*
+      - rm -rf /var/tmp/*
+      - rm -rf /sources
