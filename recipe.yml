@@ -2,7 +2,7 @@ name: eb8's Base-Image  # Core/Dev
 id: vos-eb8-base # Replace this ID with your image ID
 stages:
 - id: build
-  base: ghcr.io/vanilla-os/dev-image:main # Based on VOS-CORE & -dev, no GUI
+  base: ghcr.io/vanilla-os/core:main # Based on VOS-CORE & -dev, no GUI
   singlelayer: false
   labels:
     maintainer: dev@eb8.org
@@ -40,27 +40,43 @@ stages:
       - chmod +x /usr/bin/cur-gpu
       - lpkg --unlock
 
-# - name: dev modules
-#   type: includes
-#   includes:
-#     - gh:vanilla-os/dev-image:main:modules/00-basics.yml
-#     - gh:vanilla-os/dev-image:main:modules/01-vanilla-base-files.yml
-#     - gh:vanilla-os/dev-image:main:modules/05-go.yml
-#     - gh:vanilla-os/dev-image:main:modules/10-python.yml
-#     - gh:vanilla-os/dev-image:main:modules/20-build-tools.yml
-#     - gh:vanilla-os/dev-image:main:modules/30-gtk.yml
-#     - gh:vanilla-os/dev-image:main:modules/40-rust.yml
-#     - gh:vanilla-os/dev-image:main:modules/100-apx-gui-deps.yml
-#     - gh:vanilla-os/dev-image:main:modules/101-abroot-deps.yml
-#     - gh:vanilla-os/dev-image:main:modules/200-vib.yml
+  # Put your custom actions behind this comment
 
-  - name: eb8's base install
+  - name: dev modules
+    type: includes
+    includes:
+      - gh:vanilla-os/dev-image:main:modules/00-basics.yml
+      - gh:vanilla-os/dev-image:main:modules/01-vanilla-base-files.yml
+      - gh:vanilla-os/dev-image:main:modules/05-go.yml
+      - gh:vanilla-os/dev-image:main:modules/10-python.yml
+      - gh:vanilla-os/dev-image:main:modules/20-build-tools.yml
+      - gh:vanilla-os/dev-image:main:modules/30-gtk.yml
+      - gh:vanilla-os/dev-image:main:modules/40-rust.yml
+      - gh:vanilla-os/dev-image:main:modules/100-apx-gui-deps.yml
+      - gh:vanilla-os/dev-image:main:modules/101-abroot-deps.yml
+      - gh:vanilla-os/dev-image:main:modules/200-vib.yml
+
+  - name: base packages # Sample module using the built-in Apt module to install packages
+    type: includes
+    includes:
       - gh:chymian/vos-eb8-base:main:modules/1000-basic-pks.yml
+
+  - name: zfs setup
+    type: includes
+    includes:
       - gh:chymian/vos-eb8-base:main:modules/1010-zfs-setup.yml
+
+  - name: zerotier install
+    type: includes
+    includes:
       - gh:chymian/vos-eb8-base:main:modules/1020-zerotier-setup.yml
+
+  - name: yadm setup
+    type: includes
+    includes:
       - gh:chymian/vos-eb8-base:main:modules/1100-yadm-setup.yml
 
-  - name: eb8's dev tools
+  - name: my dev tools
     type: shell
     commands:
       - curl https://git.eb8.org/guenter/dotfiles/raw/branch/master/.local/bin/do_install_tools | bash
