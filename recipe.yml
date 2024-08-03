@@ -23,25 +23,25 @@ stages:
 
   # Put your custom actions behind this comment
 
-  - name: basic packages # Sample module using the built-in Apt module to install packages
+  - name: base packages # Sample module using the built-in Apt module to install packages
     type: includes
     includes:
-      - gh:chymian/vos-eb8-basic:main:modules/1000-basic-pks
+      - gh:chymian/vos-eb8-base:main:modules/1000-basic-pks
 
   - name: zfs setup
     type: includes
     includes:
-      - gh:chymian/vos-eb8-basic:main:modules/1010-zfs-setup
+      - gh:chymian/vos-eb8-base:main:modules/1010-zfs-setup
 
   - name: zerotier install
     type: includes
     includes:
-      - gh:chymian/vos-eb8-basic:main:modules/1020-zerotier-setup
+      - gh:chymian/vos-eb8-base:main:modules/1020-zerotier-setup
 
   - name: yadm setup
     type: includes
     includes:
-      - gh:chymian/vos-eb8-basic:main:modules/1100-yadm-setup
+      - gh:chymian/vos-eb8-base:main:modules/1100-yadm-setup
 
   - name: dev modules
     type: includes
