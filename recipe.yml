@@ -44,7 +44,7 @@ stages:
   - name: example-modules # Sample module demonstrating importing local and remote modules
     type: includes
     includes:
-      - gh:vanilla-os/dev-image/main/modules/05-go.yml # Sample full URL remote module
+      - gh:vanilla-os/dev-image:main:modules/05-go.yml # Sample full URL remote module
 
 
   - name: dev modules
