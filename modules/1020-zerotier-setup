@@ -1,0 +1,7 @@
+name: zerotier setup
+type: shell
+commands:
+ - apt-get update -y
+ - apt-get install -y gpg zerotier-one
+ - systemctl enable zerotier-one
+
