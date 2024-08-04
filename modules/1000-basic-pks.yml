@@ -7,13 +7,44 @@ source:
     - bridge-utils
     - btop
     - byobu
+    - curl
     - direnv
     - dkms
     - htop
+    - netbase
+    - nethogs
+    - netstat-nat
     - net-tools
+    - nmap
     - os-prober
+    - pydf
     - python3-requests
+    - ssh
+    - tcpdump
     - tlp
+    - traceroute
     - tree
+    - ufw
     - vim
+    - wget
     - yadm
+    
+    # misc
+    - bsd-mailx
+    - bzip2
+    - file
+    - git
+    - gnupg2
+    - htop
+    - jq
+    - less
+    - localepurge
+    - lsof
+    - make
+    - most
+    - pigz
+    - pixz
+    - postfix
+    - time
+    - unrar-free
+    - zstd
