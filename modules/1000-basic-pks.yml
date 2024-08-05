@@ -7,7 +7,7 @@ source:
     - bridge-utils
     - btop
     - byobu
-    - crontab
+#   - crontab
     - curl
     - direnv
     - dkms
