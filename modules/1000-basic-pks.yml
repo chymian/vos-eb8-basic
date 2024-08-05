@@ -7,6 +7,7 @@ source:
     - bridge-utils
     - btop
     - byobu
+    - crontab
     - curl
     - direnv
     - dkms
@@ -28,7 +29,7 @@ source:
     - vim
     - wget
     - yadm
-    
+
     # misc
     - bsd-mailx
     - bzip2
@@ -38,7 +39,7 @@ source:
     - htop
     - jq
     - less
-    - localepurge
+#   - localepurge
     - lsof
     - make
     - most
